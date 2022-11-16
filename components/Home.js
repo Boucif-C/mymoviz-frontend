@@ -17,7 +17,7 @@ function Home() {
     fetch(linkapi + '/movies')
     .then(res=>res.json())
     .then(data=>{
-        const xmovies = data.movies.results.map(x=>{
+        const xmovies = data.result.map(x=>{
           const isLiked = likedMovies.some(movie => movie === x.title);
           return <Movie key={x.id} updateLikedMovies={updateLikedMovies} isLiked={isLiked} title={x.title} overview={x.overview} poster={poster_path + x.poster_path} voteAverage={x.vote_average
           } voteCount={x.vote_count} />;
