@@ -12,9 +12,9 @@ function Home() {
   const poster_path='https://image.tmdb.org/t/p/w500/';
 
   //let movies=[];
-
+  const linkapi='https://mymoviz-backend-one.vercel.app';
   useEffect(()=>{
-    fetch('https://mymoviz-backend-one.vercel.app/movies')
+    fetch(linkapi + '/movies')
     .then(res=>res.json())
     .then(data=>{
         const xmovies = data.movies.results.map(x=>{
