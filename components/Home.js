@@ -8,7 +8,7 @@ import styles from '../styles/Home.module.css';
 
 function Home() {
   const [likedMovies, setLikedMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [themovies, setTheMovies] = useState([]);
   const poster_path='https://image.tmdb.org/t/p/w500/';
 
   //let movies=[];
@@ -17,19 +17,7 @@ function Home() {
     fetch(linkapi + '/movies')
     .then(res=>res.json())
     .then(data=>{
-        const xmovies = data.result.map(x=>{
-          const isLiked = likedMovies.some(movie => movie === x.title);
-          return <Movie key={x.id} updateLikedMovies={updateLikedMovies} isLiked={isLiked} title={x.title} overview={x.overview} poster={poster_path + x.poster_path} voteAverage={x.vote_average
-          } voteCount={x.vote_count} />;
-
-        })
-
-        setMovies(xmovies);
-      //moviesData.push({ title: 'Forrest Gump', poster: 'forrestgump.jpg', voteAverage: 9.2, voteCount: 22_705, overview: 'A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case.' },)
-        // data.movies.results.map(x=>{
-        //   console.log(x);
-          
-        // })
+      setTheMovies(data.movies)
     })
 
   },[])
@@ -68,10 +56,11 @@ function Home() {
   //   { title: 'Inception', poster: 'inception.jpg', voteAverage: 8.4, voteCount: 31_546, overview: 'Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life.' },
   // ];
 
-  // const movies = moviesData.map((data, i) => {
-  //   const isLiked = likedMovies.some(movie => movie === data.title);
-  //   return <Movie key={i} updateLikedMovies={updateLikedMovies} isLiked={isLiked} title={data.title} overview={data.overview} poster={data.poster} voteAverage={data.voteAverage} voteCount={data.voteCount} />;
-  // });
+  const movies = themovies.map((data, i) => {
+    const isLiked = likedMovies.some(movie => movie === data.title);
+    return <Movie key={i} updateLikedMovies={updateLikedMovies} isLiked={isLiked} title={data.title} overview={data.overview} poster={poster_path + data.poster_path} voteAverage={data.vote_average} voteCount={data.vote_count} />;
+  });
+
 
   return (
     <div className={styles.main}>
